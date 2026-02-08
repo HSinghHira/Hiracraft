@@ -1,0 +1,9 @@
+{
+  "menu": {
+    "singleplayer": "Play Online",
+    "multiplayer": "Coming Soon",
+    "minecraftRealms": "Minecraft Resources",
+    "options": "Creator",
+    "quitGame": "Quit Game"
+  }
+}

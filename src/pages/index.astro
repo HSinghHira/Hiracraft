@@ -1,0 +1,186 @@
+---
+import '../styles/style.css';
+
+// Import all localization files
+import enTranslations from '../locales/en.json';
+import esTranslations from '../locales/es.json';
+import frTranslations from '../locales/fr.json';
+import deTranslations from '../locales/de.json';
+
+// Create translations map
+const translations = {
+  en: enTranslations,
+  es: esTranslations,
+  fr: frTranslations,
+  de: deTranslations
+};
+
+const availableLanguages = [
+  { code: 'en', name: 'English' },
+  { code: 'es', name: 'Español' },
+  { code: 'fr', name: 'Français' },
+  { code: 'de', name: 'Deutsch' }
+];
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hiracraft - Online Minecraft</title>
+  <link rel="icon" type="image/png" href="/favicon/favicon-96x96.png" sizes="96x96" />
+  <link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg" />
+  <link rel="shortcut icon" href="/favicon/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png" />
+  <meta name="apple-mobile-web-app-title" content="MC" />
+  <link rel="manifest" href="/favicon/site.webmanifest" />
+  <script is:inline src="/js/three.min.js"></script>
+  
+  <style>
+    /* Mobile Warning Overlay */
+    .mobile-warning {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: #1a1a1a;
+      z-index: 9999;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+    
+    .mobile-warning-content {
+      max-width: 400px;
+    }
+    
+    .mobile-warning h1 {
+      color: #ffffff;
+      font-family: 'Minecraft', sans-serif;
+      font-size: 24px;
+      margin-bottom: 20px;
+      text-shadow: 3px 3px 0px rgba(0, 0, 0, 0.5);
+    }
+    
+    .mobile-warning p {
+      color: #cccccc;
+      font-family: 'Minecraft', sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.5);
+    }
+    
+    .mobile-warning-icon {
+      font-size: 64px;
+      margin-bottom: 20px;
+    }
+    
+    /* Show warning on mobile devices */
+    @media screen and (max-width: 768px) {
+      .mobile-warning {
+        display: flex !important;
+      }
+      
+      .main-content,
+      #container {
+        display: none !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Mobile Warning Overlay -->
+  <div class="mobile-warning">
+    <div class="mobile-warning-content">
+      <div class="mobile-warning-icon">⚠️</div>
+      <h1>Not Optimized for Mobile</h1>
+      <p>This website is not optimized for mobile screens. Please visit on a desktop or laptop computer for the best experience.</p>
+    </div>
+  </div>
+
+  <!-- Panorama Background Container -->
+  <div id="container"></div>
+
+  <!-- Main Content -->
+  <div class="main-content">
+    <!-- Logo Section -->
+    <div class="logo-section">
+      <img src="/img/logo.png" alt="Minecraft" class="minecraft-logo">
+      <!-- Splash Text -->
+      <div class="splash-container">
+        <div class="splash"></div>
+      </div>
+    </div>
+
+    <!-- Menu -->
+    <div class="mc-menu">
+      <div class="mc-button full" id="singleplayerButton">
+        <div class="title" data-i18n="menu.singleplayer">Load Game</div>
+      </div>
+      <div class="mc-button full">
+        <div class="title" data-i18n="menu.multiplayer">Multiplayer</div>
+      </div>
+      <div class="mc-button full" id="resourcesButton">
+        <div class="title" data-i18n="menu.minecraftRealms">Minecraft Resources</div>
+      </div>
+      <div class="double">
+        <div class="mc-button full" id="creatorButton">
+          <div class="title" data-i18n="menu.options">Creator</div>
+        </div>
+        <div class="mc-button full" id="quitButton">
+          <div class="title" data-i18n="menu.quitGame">Quit Game</div>
+        </div>
+      </div>
+      <div class="mc-button full lang" id="langButton">
+        <div class="title"><img src="/img/lang.png" alt="Lang"/></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- External JavaScript -->
+  <script is:inline src="/js/menu.js"></script>
+  
+  <!-- Initialize language with translations data -->
+  <script define:vars={{ translations, availableLanguages }}>
+    // Initialize language functionality with data from Astro
+    if (typeof initLanguage === 'function') {
+      initLanguage(translations, availableLanguages);
+    }
+  </script>
+
+  <!-- Button Click Handlers -->
+  <script is:inline>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Quit Game button - close browser tab
+      const quitButton = document.getElementById('quitButton');
+      if (quitButton) {
+        quitButton.addEventListener('click', function() {
+          window.close();
+        });
+      }
+
+      // Minecraft Resources button
+      const resourcesButton = document.getElementById('resourcesButton');
+      if (resourcesButton) {
+        resourcesButton.addEventListener('click', function() {
+          window.open('https://mc.hira.im/en/', '_blank');
+        });
+      }
+
+      // Creator button
+      const creatorButton = document.getElementById('creatorButton');
+      if (creatorButton) {
+        creatorButton.addEventListener('click', function() {
+          window.open('https://me.hsinghhira.me', '_blank');
+        });
+      }
+    });
+  </script>
+</body>
+</html>

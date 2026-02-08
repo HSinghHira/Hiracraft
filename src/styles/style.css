@@ -1,0 +1,205 @@
+@font-face {
+    font-family: 'Minecraftia';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Minecraftia'), url('../assets/fonts/Minecraftia.woff') format('woff');
+}
+
+*, ::before, ::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+html {
+  font: 12pt "Minecraftia", "Press Start 2P", monospace, sans-serif;
+}
+
+body {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-color: #000;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Panorama Background Container */
+#container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 0;
+  overflow: hidden;
+  background: #000;
+}
+
+#container canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* Main content wrapper */
+.main-content {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; /* Center the menu */
+}
+
+/* Logo Section */
+.logo-section {
+  position: absolute;
+  top: 48px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  pointer-events: none; /* Let clicks pass through to menu below if overlapping */
+}
+
+/* Minecraft Logo */
+.minecraft-logo {
+  width: 550px;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.5));
+  image-rendering: pixelated;
+}
+
+/* Splash Text */
+.splash-container {
+  position: absolute;
+  top: 75%; /* Positioned relative to logo height */
+  left: 65%; /* Positioned relative to logo width */
+  transform: rotate(-20deg);
+  z-index: 2;
+}
+
+.splash {
+  color: #FFFF00;
+  font-size: 1.5rem;
+  text-shadow: 3px 3px 0px rgba(0, 0, 0, 0.6);
+  white-space: nowrap;
+  animation: splash-pulse 0.5s ease-in-out infinite alternate;
+}
+
+@keyframes splash-pulse {
+  from {
+    transform: scale(0.95);
+  }
+  to {
+    transform: scale(1.05);
+  }
+}
+
+/* Minecraft Style Menu */
+.mc-menu {
+  --btn-size: 30pt;
+  display: grid;
+  grid-template-columns: var(--btn-size) calc(var(--btn-size) * 10) var(--btn-size);
+  grid-template-rows: repeat(3, var(--btn-size)) 16px var(--btn-size);
+  grid-template-areas: 
+    ". 		first 		."
+    ". 		second 		."
+    ". 		third 		."
+    ".		.			."
+    "lang fourth 		.";
+  grid-gap: 8px;
+  margin-top: 40px;
+}
+
+.mc-menu .mc-button:nth-child(1) {
+  grid-area: first;
+}
+
+.mc-menu .mc-button:nth-child(2) {
+  grid-area: second;
+}
+
+.mc-menu .mc-button:nth-child(3) {
+  grid-area: third;
+}
+
+.mc-menu .double {
+  grid-area: fourth;
+}
+
+.mc-menu .double .mc-button:nth-child(1) {
+  grid-area: left;
+}
+
+.mc-menu .double .mc-button:nth-child(2) {
+  grid-area: right;
+}
+
+.mc-menu .mc-button:nth-child(5) {
+  grid-area: lang;
+}
+
+.mc-menu .double {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr;
+  grid-template-areas: "left right";
+  grid-gap: 8px;
+}
+
+/* Minecraft Style Button */
+.mc-button {
+  height: var(--btn-size);
+  width: calc(var(--btn-size) * 10);
+  cursor: pointer;
+  overflow: hidden;
+  white-space: nowrap;
+  user-select: none;
+  background: #999 url("../assets/images/bgbtn.png") center/cover;
+  image-rendering: pixelated;
+  border: 2px solid #000;
+}
+
+/* Mouse over */
+.mc-button:hover .title {
+  background-color: rgba(100, 100, 255, 0.45);
+  text-shadow: 2px 2px #202013CC;
+  color: #FFFFA0;
+}
+
+.mc-button:active .title {
+  box-shadow: inset -2px -4px #0004, inset 2px 2px #FFF5;
+}
+
+/* Button title */
+.mc-button .title {
+  width: 100%;
+  height: 100%;
+  padding-bottom: 0.3em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #DDD;
+  text-shadow: 2px 2px #000A;
+  box-shadow: inset -2px -4px #0006, inset 2px 2px #FFF7;
+}
+
+/* Others */
+.mc-button.full {
+  width: 100%;
+  height: 100%;
+}
+
+.mc-button.lang img {
+  width: 26px;
+  height: 26px;
+}
+
+.mc-button.lang .title {
+  padding-bottom: 0;
+}

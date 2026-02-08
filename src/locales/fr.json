@@ -1,0 +1,9 @@
+{
+  "menu": {
+    "singleplayer": "Jouer en Ligne",
+    "multiplayer": "Bientôt Disponible",
+    "minecraftRealms": "Ressources Minecraft",
+    "options": "Créateur",
+    "quitGame": "Quitter le Jeu"
+  }
+}
